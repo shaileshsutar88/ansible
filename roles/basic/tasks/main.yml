@@ -1,2 +1,13 @@
 - name: "Installing VIM"
-  apt: pkg=vim state=installed
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - vim
+  - htop
+  - dnsutils
+  - ansible
+
+- name: "Removing extra packages"
+  apt: pkg={{ item }} state=absent
+  with_items:
+  - landscape-common
+  - landscape-client
