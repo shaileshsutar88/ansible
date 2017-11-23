@@ -5,6 +5,10 @@
   - htop
   - dnsutils
   - ansible
+  - tree
+  - curl
+  - screen
+  - traceroute
 
 - name: "Removing extra packages"
   apt: pkg={{ item }} state=absent
