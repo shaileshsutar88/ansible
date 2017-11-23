@@ -23,12 +23,18 @@
     - php-mysql
 
 - name: "Copy config files"
-  copy: {{ item }}
+  copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
   with_items:
-    src=../files/index.php dest=/var/www/html/ owner=root group=root mode=0755
-    src=../files/default dest=/etc/nginx/sites-available/default owner=root group=root mode=0644
+    - { src: '../files/index.php', dest: '/var/www/html/', owner: 'root', group: 'root', mode: '0755' }
+    - { src: '../files/default', dest: '/etc/nginx/sites-available/default', owner: 'root', group: 'root', mode: '0644' }
+
+#- name: "Copy Nginx config file"    
+#  copy: src=../files/default dest=/etc/nginx/sites-available/default owner=root group=root mode=0644
+
+#- name: "Copy php index file"
+#  copy: src=../files/index.php dest=/var/www/html/ owner=root group=root mode=0755
 
 - name: 'edit php.ini'
-  command: {{ item }}
+  command: "{{ item }}"
   with_items:
     sed -i 's:cgi.fix_pathinfo=1:cgi.fix_pathinfo=0:g' /etc/php/7.0/fpm/php.ini
