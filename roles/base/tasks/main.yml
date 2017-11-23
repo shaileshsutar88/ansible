@@ -1,21 +1,4 @@
-- name: "Installing Base Packages"
-  apt: >
-    pkg={{ item }}
-    state=latest
-    update_cache=yes
-    cache_valid_time=3600
-  with_items:
-  - vim
-  - htop
-  - dnsutils
-  - ansible
-  - tree
-  - curl
-  - screen
-  - traceroute
+---
 
-- name: "Removing extra packages"
-  apt: pkg={{ item }} state=absent
-  with_items:
-  - landscape-common
-  - landscape-client
+- include: base-packages.yml
+- include: extra-removal.yml
