@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- hosts: ansible-node-1
   become: true
   roles:
   - base
+  - web
