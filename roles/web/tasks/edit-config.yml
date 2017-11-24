@@ -1,0 +1,5 @@
+- name: 'edit Config files'
+  command: "{{ item }}"
+  with_items:
+    - sed -i 's:cgi.fix_pathinfo=1:cgi.fix_pathinfo=0:g' /etc/php/7.0/fpm/php.ini
+    - sudo rm -rf /var/www/html

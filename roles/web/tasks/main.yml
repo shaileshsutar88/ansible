@@ -1,46 +1,8 @@
-- name: "Install Nginx"
-  apt: >
-    pkg=nginx
-    state=latest
-    update_cache=yes
-    cache_valid_time=3600
+---
 
-- name: "Install MySQL server"
-  apt: >
-    pkg=mysql-server
-    state=latest
-    update_cache=yes
-    cache_valid_time=3600
-
-- name: "Install php-fpm"
-  apt: >
-    pkg={{ item }}
-    state=latest
-    update_cache=yes
-    cache_valid_time=3600
-  with_items:
-    - php-fpm
-    - php-mysql
-
-- name: "Copy config files"
-  copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
-  with_items:
-    - { src: '../files/index.php', dest: '/var/www/html/', owner: 'root', group: 'root', mode: '0755' }
-    - { src: '../files/default', dest: '/etc/nginx/sites-available/default', owner: 'root', group: 'root', mode: '0644' }
-
-#- name: "Copy Nginx config file"    
-#  copy: src=../files/default dest=/etc/nginx/sites-available/default owner=root group=root mode=0644
-
-#- name: "Copy php index file"
-#  copy: src=../files/index.php dest=/var/www/html/ owner=root group=root mode=0755
-
-- name: 'edit php.ini'
-  command: "{{ item }}"
-  with_items:
-    - sed -i 's:cgi.fix_pathinfo=1:cgi.fix_pathinfo=0:g' /etc/php/7.0/fpm/php.ini
-    - sudo rm -rf /var/www/html
-
-- name: Application git clone
-  git: 
-    repo: https://github.com/shaileshsutar88/deploy.git
-    dest: /var/www/html
+- include: nginx-install.yml
+- include: mysql-install.yml
+- include: php-install.yml
+- include: edit-config.yml
+- include: file-copy.yml
+- include: app-clone.yml
