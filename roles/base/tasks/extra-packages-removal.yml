@@ -3,3 +3,4 @@
   with_items:
   - landscape-common
   - landscape-client
+  - popularity-contest

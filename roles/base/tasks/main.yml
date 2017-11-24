@@ -1,4 +1,4 @@
 ---
 
-- include: base-packages.yml
-- include: extra-removal.yml
+- include: base-packages-install.yml
+- include: extra-packages-removal.yml
