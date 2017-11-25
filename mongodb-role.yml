@@ -1,0 +1,6 @@
+---
+
+- hosts: centos-node-1
+  become: true
+  roles:
+  - base
