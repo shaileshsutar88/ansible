@@ -13,3 +13,10 @@
   - curl
   - screen
   - traceroute
+  - unattended-upgrades
+
+- name: "Edit config file"
+  command: "{{ item }}"
+  with_items:
+    - sudo sed -i 's:AutoFixInterruptedDpkg "False";:AutoFixInterruptedDpkg "True";:g' /etc/apt/apt.conf.d/50unattended-upgrades
+    - sudo sed -i 's:Remove-Unused-Dependencies "False";:Remove-Unused-Dependencies "True";:g' /etc/apt/apt.conf.d/50unattended-upgrades
