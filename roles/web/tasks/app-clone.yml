@@ -2,3 +2,8 @@
   git: 
     repo: https://github.com/shaileshsutar88/deploy.git
     dest: /var/www/html
+
+- name: "Restart Nginx service"
+  service: >
+    name=nginx
+    state=restarted
