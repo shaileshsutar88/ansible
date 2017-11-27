@@ -14,6 +14,7 @@
   - screen
   - traceroute
   - unattended-upgrades
+  - sysstat
 
 - name: "Edit config file"
   command: "{{ item }}"
