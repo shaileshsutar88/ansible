@@ -3,7 +3,10 @@
     repo: https://github.com/shaileshsutar88/deploy.git
     dest: /var/www/html
 
-- name: "Restart Nginx service"
+- name: "restart services"
   service: >
-    name=nginx
+    name= "{{ item }}"
     state=restarted
+  with_items:
+    - nginx
+    - php7.0-fpm
