@@ -48,12 +48,23 @@
   with_items:
     - { src: '../files/tomcat.service', dest: '/etc/systemd/system/tomcat.service', owner: 'root', group: 'root', mode: '0644' }
     - { src: '../files/tomcat-users.xml', dest: '/opt/tomcat/conf', owner: 'root', group: 'tomcat', mode: '0640' }
+    - { src: '../files/manager.xml', dest: '/opt/tomcat/webapps/manager/META-INF/context.xml', owner: 'tomcat', group: 'tomcat', mode: '0640' }
+    - { src: '../files/host-manager.xml', dest: '/opt/tomcat/webapps/host-manager/META-INF/context.xml', owner: 'tomcat', group: 'tomcat', mode: '0640' }
 
 - name: "Update Java alternatives"
   command: "{{ item }}"
   become: yes
   become_method: sudo
   with_items:
+    - systemctl enable tomcat.service
     - systemctl daemon-reload
     - systemctl start tomcat
     - sudo ufw allow 8080
+
+- name: "Restart tomcat service"
+  service: >
+    name= "{{ item }}"
+    state=restarted
+  with_items:
+    - tomcat
+    - networking
