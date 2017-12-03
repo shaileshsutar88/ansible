@@ -1,7 +1,9 @@
 ---
-- hosts: all
+
+- hosts: ansible-tomcat
   become: yes
   become_method: sudo
   roles:
   - base
   - security
+  - tomcat

@@ -1,6 +1,7 @@
 ---
 - hosts: ansible-node-1
-  become: true
+  become: yes
+  become_method: sudo
   roles:
   - base
   - security
