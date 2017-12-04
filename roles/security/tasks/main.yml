@@ -3,11 +3,12 @@
   with_items:
     - { src: '../files/sysctl.conf', dest: '/etc/sysctl.conf', owner: 'root', group: 'root', mode: '0644' }
 
-- name: 'edit config files'
+- name: "edit config files"
   command: "{{ item }}"
   become: true
+  become_method: sudo
   with_items:
-    - sed -i 's:order hosts,bind:​order bind,hosts:g' /etc/host.conf
+    - sed -i 's:order hosts,bind:order bind,hosts:g' /etc/host.conf
     - sed -i 's:multi on:nospoof on:g' /etc/host.conf
 
 - name: "Restart services"

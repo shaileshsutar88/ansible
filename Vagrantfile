@@ -14,6 +14,8 @@ Vagrant.configure(2) do |config|
   config.vm.define "web" do |machine|
     machine.vm.box = "ubuntu/xenial64"
 
+  config.vm.network :forwarded_port, guest: 80, host: 8080  
+
     machine.vm.provision "ansible" do |ansible|
       ansible.playbook = "web-role.yml"
       ansible.extra_vars = {
