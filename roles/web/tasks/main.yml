@@ -5,10 +5,4 @@
 - include: php-install.yml
 - include: edit-config.yml
 - include: file-copy.yml
-
-- name: Application git clone
-  git: 
-    repo: https://github.com/shaileshsutar88/deploy.git
-    dest: /var/www/html
-  notify:
-    - restart services
+- include: app-clone.yml
