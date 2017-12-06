@@ -8,7 +8,7 @@
   - vim
   - htop
   - dnsutils
-  - ansible
+  - finger
   - tree
   - curl
   - screen
