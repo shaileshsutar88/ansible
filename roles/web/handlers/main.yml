@@ -1,7 +1,7 @@
-- name: "restart services"
+- name: "reload services"
   service: >
-    name= "{{ item }}"
-    state=restarted
+    name="{{ item }}"
+    state=reloaded
   with_items:
     - nginx
     - php7.0-fpm

@@ -12,6 +12,8 @@
     - sed -i 's:# gzip_http_version:gzip_http_version:g' /etc/nginx/nginx.conf
     - sed -i 's:# gzip_min_length:gzip_min_length:g' /etc/nginx/nginx.conf
     - sed -i 's:# gzip_types:gzip_types:g' /etc/nginx/nginx.conf
+  notify:
+    - reload services
 
 - name: "Delete /var/www/html folder"
   become: true

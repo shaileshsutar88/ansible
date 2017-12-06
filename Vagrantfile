@@ -17,6 +17,7 @@ Vagrant.configure(2) do |config|
   config.vm.network :forwarded_port, guest: 80, host: 8080  
 
     machine.vm.provision "ansible" do |ansible|
+      ansible.verbose = "v"
       ansible.playbook = "web-role.yml"
       ansible.extra_vars = {
         ansible_python_interpreter: "/usr/bin/python3.5",
