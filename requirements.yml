@@ -1,0 +1,4 @@
+---
+
+- src: andperez.mongodb
+  name: vendor.mongodb

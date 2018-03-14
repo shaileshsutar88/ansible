@@ -1,0 +1,44 @@
+---
+
+- name: clone pro-files
+  git:
+    repo: https://github.com/shaileshsutar88/pro-files.git
+    dest: /etc/pro-files
+
+- name: create user groups
+  group:
+    name: "{{item.username}}"
+  with_items: "{{ users }}"
+
+- name: add user accounts
+  user:
+    name: "{{item.username}}"
+    uid: "{{item.uid}}"
+    password: "{{item.password}}"
+    update_password: always
+    comment: "{{item.comment}}"
+    system: no
+    group: "{{item.username}}"
+    groups: "{{ item.groups | join(',') }}"
+    append: yes
+    createhome: yes
+    generate_ssh_key: no
+    shell: /bin/bash
+  with_items: "{{ users }}"
+
+- name: symlink pro-files
+  file:
+    src: "/etc/pro-files/{{item[1]}}"
+    dest: "/home/{{item[0].username}}/{{item[1]}}"
+    state: link
+    force: true
+  with_nested:
+    - "{{ users }}"
+    - [ ".bashrc", ".motd"]
+
+- name: ssh keys
+  authorized_key:
+    user: "{{item.username}}"
+    key: "{{item.ssh_keys | join('\n')}}"
+    exclusive: yes
+  with_items: "{{ users }}"

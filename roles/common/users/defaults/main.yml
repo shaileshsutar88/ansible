@@ -1,0 +1,9 @@
+users:
+  - username : demouser
+    uid      : 2018
+    comment  : demouser
+    groups   : [ sudo ]
+    home     : /home/demouser
+    password : "put your encrypted password here obtained from command `openssl passwd -1 'putyourpasswordhere'`"
+    ssh_keys :
+      - "Put your rsa key here"
